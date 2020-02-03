@@ -1,0 +1,652 @@
+<?xml version="1.0"?>
+
+<!-- <?xml version="1.0"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+</xsd:schema>   -->
+
+
+
+<!--
+
+    Document   :    LBX.xsd 2020
+    Description:      
+	
+	Language Base Exchange (LBX) is a W3C schema serialization of Lexical Markup Framework (LMF), ISO 24613:2008.  LBX generally complies with LMF, but adds some new features which are 
+	potential candidates for future revisions of the current standard.  Parts of LBX also cover terminological data, and those parts comply closely with Terminological markup framework,
+	ISO 16642. This serialization only covers those parts of LBX that are relevant for lexical data, including WORDNET-LMF.  Because of LBX's more comprehensive coverage, some data categories
+	names (elements and attributes) do not conform to the labels found in the LMF document.  The LBX labels should be considered aliases.  For this reason, the name, Lexical Base Exchange,
+	is somewhat of a a misnomer.  It is not strictly an exchange format because it is likely that a data exchange would involve element and attribute labels more consistent with those found in the 
+	LMF standard.      -->
+
+
+    <!--  LBX manages grammatical features, Part of Speech information, dialects and other language features through the use of namespaces.  Five languages have been chosen to provide examples
+	of how these features are designed.  The selection of languages is intended to illustrate the variety of linguistic features among different languages and language families. 
+	Spanish - an inflected Western European language in Latin script
+	Russian - a very highly inflected European language in a non-Latin script
+	Chinese - an East Asian character (ideograph) based language - an isolate language
+	Arabic - a right to left language in a non-Indo-European language in a non-Latin script 
+	Zulu - a non-Indo-European (Bantu) agglutinative language       --> 
+
+<xs:schema
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   xmlns:arald="http://www.arald.com/ArabicLanguageData"
+   xmlns:zhold="http://www.zhold.com/ChineseLanguageData"
+   xmlns:espld="http://www.espld.com/SpanishLanguageData"
+   xmlns:rusld="http://www.rusld.com/RussianLanguageData"
+   xmlns:zulld="http://www.zulld.com/ZuluLanguageData"
+   xmlns:meta="http://www.meta.com/Meta">
+
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+  <xs:import namespace="http://www.meta.com/Meta" schemaLocation="Meta.xsd"/>
+  <xs:import namespace="http://www.arald.com/ArabicLanguageData" schemaLocation="ArabicLanguageData.xsd"/>
+  <xs:import namespace="http://www.zhold.com/ChineseLanguageData" schemaLocation="ChineseLanguageData.xsd"/>
+  <xs:import namespace="http://www.rusld.com/RussianLanguageData" schemaLocation="RussianLanguageData.xsd"/>
+  <xs:import namespace="http://www.espld.com/SpanishLanguageData" schemaLocation="SpanishLanguageData.xsd"/>
+  <xs:import namespace="http://www.zulld.com/ZuluLanguageData" schemaLocation="ZuluLanguageData.xsd"/>
+
+  <!-- GobalInformation, described in LMF,  includes the ISO language codes and dialect codes -->
+ 
+  <xs:include schemaLocation="GlobalInformation.xsd"/> 
+
+  <!--  the grammarDataCatalogue contains a consolidated set of linguistic information from the individual LanguageData files.   -->
+
+  <xs:include schemaLocation="grammarDataCatalogue.xsd"/>
+
+<!--  Part of Speech information   -->
+
+  <xs:group name="POS">
+    <xs:choice>
+      <xs:element ref="arald:POS"/>
+      <xs:element ref="zhold:POS"/>
+      <xs:element ref="rusld:POS"/>
+      <xs:element ref="espld:POS"/>
+      <xs:element ref="zulld:POS"/>
+    </xs:choice>
+  </xs:group>
+
+  <xs:group name="GrammaticalFeatures">
+    <xs:choice>
+      <xs:element ref="arald:grammaticalFeatures"/>
+      <xs:element ref="rusld:grammaticalFeatures"/>
+      <xs:element ref="espld:grammaticalFeatures"/>
+      <xs:element ref="zulld:grammaticalFeatures"/>
+    </xs:choice>
+  </xs:group>
+
+<!--  See LMF  for List of Components   -->
+
+  <xs:group name="componentIndex">
+    <xs:choice>
+      <xs:element ref="zhold:componentIndex"/>
+    </xs:choice>
+  </xs:group>
+
+<!-- Separate manage of affixes, morphemes, etc.   -->
+
+<xs:group name="partFeatures">
+    <xs:choice>
+      <xs:element ref="zulld:partFeatures"/>
+    </xs:choice>
+  </xs:group>
+
+  <xs:group name="Dialect">
+    <xs:choice>
+      <xs:element ref="arald:Dialect"/>
+      <xs:element ref="zhold:Dialect"/>
+      <xs:element ref="rusld:Dialect"/>
+      <xs:element ref="espld:Dialect"/>
+      <xs:element ref="zulld:Dialect"/>
+    </xs:choice>
+  </xs:group>
+
+  <xs:complexType name="NoteType" mixed="true">
+        <xs:attribute ref="xml:lang" use="optional"/>
+        <xs:attribute ref="script"/>
+        <xs:attribute ref="notation"/>
+        </xs:complexType>
+  <xs:element name="Note" type="NoteType"/>
+
+
+  <!--   ================== End Global Section =======  -->
+
+  <!--  =======Lexical Resource, Lexicon, and Lexical Entry Sections  ====  -->
+
+ <!--  Most importantly, supports the schema for WORDNET-LMF, not curently part of this version of LBX.   -->
+
+  <xs:complexType name="LexicalResourceType">
+    <xs:sequence>
+      <xs:element ref="Source" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Lexicon" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="languageResCollectionID" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:element name="LexicalResource" type="LexicalResourceType"/>
+
+
+ <!-- LanguageResource is equivalent to LexicalResource in LMF   -->
+
+
+  <xs:complexType name="LexiconType">
+    <xs:sequence>
+      <xs:element name="ResourceName" minOccurs="1" maxOccurs="1">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element ref="Entry" minOccurs="1" maxOccurs="unbounded"/>
+	   <!--  <xs:element ref="Synset" minOccurs="0" maxOccurs="unbounded"/>   -->
+	  </xs:sequence>
+    <xs:attribute name="resourceID" type="xs:ID" use="optional"/>
+    <xs:attribute name="langResCollectionID" type="xs:IDREF" use="optional"/>
+    <xs:attribute ref="resourceType" use="required"/>
+    <xs:attribute name="sourceLanguage" use="required"/>
+    <xs:attribute name="targetLanguage" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:element name="Lexicon" type="LexiconType"/>
+
+
+  <xs:complexType name="MorphologyClassType">
+    <xs:sequence>
+      <xs:element name="Inflection" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Conjugation" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Derivation" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Declension" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MorphologyClass" type="MorphologyClassType"/>
+  <xs:complexType name="InflectionType">
+    <xs:sequence>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:attribute name="inflectionType" type="xs:string"/>
+  <xs:element name="Inflection" type="InflectionType"/>
+
+  <xs:complexType name="ConjugationType">
+    <xs:sequence>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:attribute name="conjugationType" type="xs:string"/>
+
+  <xs:element name="Conjugation" type="ConjugationType"/>
+  <xs:complexType name="DeclensionType">
+    <xs:sequence>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:attribute name="declensionType" type="xs:string"/>
+  <xs:element name="Declension" type="DeclensionType"/>
+
+  <xs:complexType name="DerivationType">
+    <xs:sequence>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+    <xs:attribute name="derivationType" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="Derivation" type="DerivationType"/>
+
+  <!--  Entry is equivalent to LexicalEntry in LMF   -->
+
+  <xs:complexType name="EntryType">
+    <xs:sequence>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Etymology" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:group ref="POS" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Subcat" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Domain" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:group ref="Dialect" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:group ref="GrammaticalFeatures" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="MorphologyClass" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Lemma" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="WordForm" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Stem" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="WordPart" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="RelForm" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Sense" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="entryID" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="conceptID" type="xs:string" use="optional"/>
+    <xs:attribute name="resourceID" type="xs:IDREF" use="optional"/>
+    <xs:attribute name="entryStatusType">
+      <xs:simpleType>
+        <xs:restriction base="xs:NMTOKEN">
+          <xs:enumeration value="permanent"/>
+          <xs:enumeration value="candidate"/>
+          <xs:enumeration value="deprecated"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="lastModifier" type="xs:string"/>
+    <xs:attribute name="lastModifiedDate" type="xs:date"/>
+    <xs:attribute name="submitter" type="xs:string"/>
+    <xs:attribute name="submissionDate" type="xs:date"/>
+  </xs:complexType>
+  <xs:element name="Entry" type="EntryType"/>
+
+     <!--  deprecated "lex-termType".  Not needed for a purely lexical schema.   -->
+
+
+
+  <!--  =========End Lexical Resource, Lexicon, & Lexical Entry Section  ========  -->
+
+
+  <!--  ===========  Form Section =============  -->
+
+ <!--  The WordFormType is used for the <Lemma> and the <WordForm>   -->
+
+  <xs:complexType name="WordFormType">
+    <xs:sequence>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:group ref="Dialect" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="GeographicUsage" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:group ref="POS" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Subcat" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="MorphologyClass" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:group ref="GrammaticalFeatures" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="FormRep" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="register" type="xs:anySimpleType" use="optional"/>
+    <xs:attribute ref="formStructure"/>
+    <xs:attribute ref="formType" use="optional"/>
+    <xs:attribute ref="partType" use="optional"/>
+    <xs:attribute name="homonymID" use="optional"/>
+    <xs:attribute name="senseRef" type="xs:string" use="optional"/>
+  </xs:complexType>
+  <xs:element name="WordForm" type="WordFormType"/>
+  <xs:element name="Lemma" type="WordFormType"/>
+
+
+
+  <xs:complexType name="StemType">
+    <xs:sequence>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:group ref="Dialect" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="FormRep" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="StemClass" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute ref="xml:lang" use="optional"/>
+    <xs:attribute name="stemName" type="xs:string" use="optional"/>
+    <xs:attribute name="type">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="stem"/>
+          <xs:enumeration value="root"/>
+          <xs:enumeration value="radical"/>
+          <xs:enumeration value="Arabic Root"/>
+          <xs:enumeration value="Bantu Stem"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element name="Stem" type="StemType"/>
+
+<!--  For affixes, morphemes, etc.   -->
+
+  <xs:complexType name="WordPartType" mixed="true">
+    <xs:sequence>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:group ref="GrammaticalFeatures" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:group ref="partFeatures" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="PartRep" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="morphologyType" use="optional"/>
+    <xs:attribute ref="partType" use="optional"/>
+  </xs:complexType>
+  <xs:element name="WordPart" type="WordPartType"/>
+
+
+  <xs:complexType name="StemClassType">
+    <xs:sequence>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="stemClassName" type="xs:string" use="optional"/>
+  </xs:complexType>
+  <xs:element name="StemClass" type="StemClassType"/>
+
+
+  <xs:complexType name="RelFormType">
+    <xs:sequence>
+      <xs:element ref="Domain" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:group ref="POS" minOccurs="0" maxOccurs="1"/>
+      <xs:group ref="Dialect" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:group ref="GrammaticalFeatures" minOccurs="0"/>
+<!--   proposed change    -->
+      <xs:element ref="RelFormRep" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="FormRep" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Gloss" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="register" type="xs:anySimpleType" use="optional"/>
+    <xs:attribute ref="relationshipType" use="optional"/>
+    <xs:attribute name="relatedEntryID" type="xs:string" use="optional"/>
+    <xs:attribute ref="formStructure" use="optional"/>
+  </xs:complexType>
+  <xs:element name="RelForm" type="RelFormType"/>
+
+
+
+<!--   for modeling consistency probably want an orthRepType   -->
+
+ <!-- <xs:complexType name="FormRepType" mixed="true">   -->
+
+
+    <xs:complexType name="OrthRepType" mixed="true">
+    <xs:sequence>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute ref="xml:lang" use="required"/>
+    <xs:attribute ref="script" use="required"/>
+    <xs:attribute ref="notation" use="required"/>
+    <xs:attribute name="geographicUsage" type="xs:anySimpleType" use="optional"/>
+    <xs:attribute name="orthographicalVariant" type="xs:anySimpleType" use="optional"/>
+    <xs:attribute ref="representationType"/>
+  </xs:complexType>
+  <xs:element name="OrthRep" type="OrthRepType"/>   
+  <xs:element name="FormRep" type="OrthRepType"/>
+  <xs:element name="PartRep" type="OrthRepType"/>
+  <xs:element name="StemRep" type="OrthRepType"/>    
+  <xs:element name="RelFormRep" type="OrthRepType"/>  
+  <xs:element name="TextRep" type="OrthRepType"/>   
+  <xs:element name="DefRep" type="OrthRepType"/>   
+
+
+<xs:attribute name="formType">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="abbreviation"/>
+					<xs:enumeration value="acronym"/>
+					<xs:enumeration value="contraction"/>
+					<xs:enumeration value="full form"/>
+					<xs:enumeration value="inflection"/>
+					<xs:enumeration value="variant"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>	
+		
+		<xs:simpleType name="formStructure">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="word"/>
+				<xs:enumeration value="multi-word expression"/>
+				<xs:enumeration value="phrase"/>
+				<xs:enumeration value="noun phrase"/>
+				<xs:enumeration value="idiom"/>
+				<xs:enumeration value="verb phrase"/>
+				<xs:enumeration value="adverb phrase"/>
+				<xs:enumeration value="adjective phrase"/>
+				<xs:enumeration value="predicate"/>
+				<xs:enumeration value="compound"/>
+				<xs:enumeration value="particle"/>
+				<xs:enumeration value="sentence"/>
+			</xs:restriction>
+		</xs:simpleType>
+		<xs:attribute name="formStructure" type="formStructure"/>
+
+
+	<xs:simpleType name="partType">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="affix"/>
+				<xs:enumeration value="prefix"/>
+				<xs:enumeration value="suffix"/>
+				<xs:enumeration value="inflectional suffix"/>
+				<xs:enumeration value="circumfix"/>
+				<xs:enumeration value="infix"/>
+				<xs:enumeration value="clitic"/>
+				<xs:enumeration value="enclitic"/>
+				<xs:enumeration value="post position"/>
+				<xs:enumeration value="stem"/>
+			</xs:restriction>
+		</xs:simpleType>
+		<xs:attribute name="partType" type="partType"/>
+		
+		<xs:simpleType name="relationshipType">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="undefined"/>
+				<xs:enumeration value="antonym"/>
+				<xs:enumeration value="synonym"/>
+				<xs:enumeration value="variant"/>
+				<xs:enumeration value="crossref"/>
+			</xs:restriction>
+		</xs:simpleType>
+		<xs:attribute name="relationshipType" type="relationshipType"/>
+		
+		<xs:simpleType name="representationType">
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="canonicalForm"/>
+				<xs:enumeration value="phoneticForm"/>
+				<xs:enumeration value="transliteration"/>
+				<xs:enumeration value="transcription"/>
+				<xs:enumeration value="romanization"/>
+				<xs:enumeration value="syllabification"/>
+				<xs:enumeration value="pronunciation"/>
+			</xs:restriction>
+		</xs:simpleType>
+		<xs:attribute name="representationType" type="representationType"/>
+		
+		<xs:simpleType name="resourceTypeType">
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="bilingualDictionary"/>
+				<xs:enumeration value="monolingualDictionary"/>
+			</xs:restriction>
+		</xs:simpleType>
+		<xs:attribute name="resourceType" type="resourceTypeType"/>
+
+<!--   This version of LBX does not include complex types and elements related to the /ListOfComponenents/ and /Component/
+       classes, since these have been deprecated from the multi-part revison of ISO 24613, Lexical Markup Framwork (LMF), 
+       currently under development  -->
+
+
+
+
+  <!--  ============ End Form Section  =============  -->
+
+  <!-- ===========  Sense Section   ======= -->
+
+
+
+  <xs:complexType name="SenseType">
+    <xs:sequence>
+      <xs:element ref="Translation" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Def" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Domain" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Example" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="GeographicUsage" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Source" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="nr" type="xs:string" use="optional"/>
+    <xs:attribute name="sourceID" type="xs:integer" use="optional"/>
+    <xs:attribute name="senseID" type="xs:anySimpleType" use="optional"/>
+  </xs:complexType>
+  <xs:element name="Sense" type="SenseType"/>
+
+
+
+<!--   The element name, <Translation>, was <Equiv> in earlier versions of LBX.   -->
+
+  <xs:complexType name="TranslationType" mixed="true">
+    <xs:sequence>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute ref="xml:lang" use="required"/>
+    <xs:attribute ref="script" use="optional"/>
+    <xs:attribute ref="notation" use="optional"/>
+  </xs:complexType>
+  <xs:element name="Translation" type="TranslationType"/>
+
+<!--   The <Def element is used to group TextRep elements that manage text literals.  LBX uses the <DefRep> element to implement a
+       subclass of /TextRepresentation/.  In this revision, mixed="true" rather that "false", which was used in earlier versions. 
+       This change will allow the <Def> element to contain character content, enabling possible document simplification in which the
+       text literals could be managed directly in the <Def> element rather that in the <DefRep> element. This change will
+       enable improved harmonization betweeh better LBX and TEI.      -->
+
+  <xs:complexType name="DefinitionType" mixed="true">
+    <xs:sequence>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Def" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Definition" type="DefinitionType"/>
+
+
+ <!--  The use of the <DefRep> element allows the use of more that one orthographic representation for the definition, for example,
+       Simplified Chinese and Traditional Chinese.   --> 
+
+ <xs:complexType name="DefType" mixed="true">
+    <xs:sequence>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="TextRep" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute ref="xml:lang" use="optional"/>
+    <xs:attribute ref="script" use="optional"/>
+    <xs:attribute ref="notation" use="optional"/>
+    <xs:attribute ref="representationType" use="optional"/>
+  </xs:complexType>
+  <xs:element name="Def" type="DefType"/>
+
+  <!-- The <Example> element manages "sample" phrases and sentences.  The element name <Context> was used in earlier versions
+       of LBX.  The <Example> element name had been used in the sense of the terminological usage, e.g. "apple", "pear", etc. used to 
+       illustrate the sense of "fruit".  This uage has been deprecated from LBX, but can be readded if justified by sufficient
+       used cases.       -->
+
+  <xs:complexType name="ExampleType" mixed="true">
+    <xs:sequence>
+      <xs:element ref="TextRep" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Gloss" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="Domain" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute ref="contextType"/>
+    <xs:attribute name="dialect" type="xs:string"/>
+  </xs:complexType>
+  <xs:element name="Example" type="ExampleType"/>
+
+<!--   Example manages words or multi-word expressions that could potentially be managed by a separate entry.
+       For example, some dictionaries manage idioms as part of the Sense  -->
+
+
+  <!--  a "gloss" of a foreign language phrase or sentence that is part of a Context section   -->
+
+  <xs:complexType name="GlossType" mixed="true">
+    <xs:sequence>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute ref="xml:lang" use="optional"/>
+  </xs:complexType>
+  <xs:element name="Gloss" type="GlossType"/>
+
+<!--  if hanRadicalNumber and orthType (what is this?) are deleted, this complexType can be replaced by
+      orthRepType   -->
+
+<!--  <xs:complexType name="TextRepType" mixed="true">
+    <xs:sequence>
+      <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="hanRadicalNumber" type="xs:integer" use="optional"/>
+    <xs:attribute ref="xml:lang" use="required"/>
+    <xs:attribute ref="script" use="required"/>
+    <xs:attribute ref="notation" use="required"/>
+    <xs:attribute name="orthtype" type="xs:anySimpleType" use="optional"/>
+    <xs:attribute name="geographicUsage" type="xs:anySimpleType" use="optional"/>
+    <xs:attribute name="orthographicalVariant" type="xs:anySimpleType" use="optional"/>
+    <xs:attribute ref="representationType"/>
+  </xs:complexType>
+  <xs:element name="TextRep" type="TextRepType"/>   -->
+
+	<xs:simpleType name="contextTypeType">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="undefined"/>
+				<xs:enumeration value="idiom"/>
+				<xs:enumeration value="crossref"/>
+				<xs:enumeration value="compound verb"/>
+			</xs:restriction>
+		</xs:simpleType>
+		<xs:attribute name="contextType" type="contextTypeType"/>
+		
+		<!--  the translation equivalent   -->
+		
+		<xs:simpleType name="equivalentType">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="fullForm"/>
+				<xs:enumeration value="abbreviation"/>
+				<xs:enumeration value="acronym"/>
+				<xs:enumeration value="contraction"/>
+			</xs:restriction>
+		</xs:simpleType>
+		<xs:attribute name="equivalentType" type="equivalentType"/>
+
+
+  <xs:complexType name="MetaType">
+    <xs:attribute name="date" type="xs:string" use="optional"/>
+    <xs:attribute name="confidenceRating" type="xs:string" use="optional"/>
+    <xs:attribute name="comment" type="xs:string" use="optional"/>
+  </xs:complexType>
+  <xs:element name="Meta" type="MetaType"/>
+
+  <!--  ===========  End Sense Section  ================  -->
+
+
+<!--  This may be replaceable by the Dublin Core    -->
+
+  <xs:complexType name="SourceType" mixed="true">
+    <xs:sequence>
+      <xs:element name="SourceName" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Producer" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="SourceNote" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="sourceType" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="print dictionary">
+            <xs:annotation>
+              <xs:appinfo>
+                <meta:appMetadata>
+                  <meta:visible>true</meta:visible>
+                </meta:appMetadata>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="electronic dictionary">
+            <xs:annotation>
+              <xs:appinfo>
+                <meta:appMetadata>
+                  <meta:visible>true</meta:visible>
+                </meta:appMetadata>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Internet">
+            <xs:annotation>
+              <xs:appinfo>
+                <meta:appMetadata>
+                  <meta:visible>true</meta:visible>
+                </meta:appMetadata>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="in-house glossary">
+            <xs:annotation>
+              <xs:appinfo>
+                <meta:appMetadata>
+                  <meta:visible>true</meta:visible>
+                </meta:appMetadata>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="sourceID" type="xs:string" use="optional"/>
+  </xs:complexType>
+  <xs:element name="Source" type="SourceType"/>
+
+</xs:schema>

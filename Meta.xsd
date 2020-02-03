@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema attributeFormDefault="qualified"
+	elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.meta.com/Meta"
+    xmlns="http://www.meta.com/Meta"
+	xmlns:meta="http://www.meta.com/Meta">
+
+	<xs:element name="appMetadata" type="meta:appMetadataType"/>
+	<xs:complexType name="appMetadataType">
+		<xs:sequence>
+			<xs:element name="script" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="required" type="xs:boolean" default="false" minOccurs="0" />
+            <xs:element name="visible" type="xs:boolean" default="false" minOccurs="0"/>
+			<xs:element name="sample" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="allowedInSection" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="POS" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+   
+
+</xs:schema>

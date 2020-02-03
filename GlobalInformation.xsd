@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Document   : GlobalInformation.xsd
+
+    Created on : 
+
+    Description:
+
+        Purpose of XML Schema document follows:
+
+        The purpose of this module is to maintain global information, including global
+	    language data that is relevant for a particular resource. In the case of script codes,
+	    the developer could easily maintain a copy of the entire set. In the case of language
+        codes, the developer may want to maintain a subset of language codes relevant for the
+	    lexicons maintained in the resource.  The purpose of including copies of specific code sections used for a language
+		resource or set of language resources, rather than just referencing the relevant standard, is to
+		facilitate validation of those resources in conjunction with other schema sections.
+		
+		
+		-->
+
+		  <!--  The selected language codes correspond to the example languages   -->
+
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+  
+  <xs:simpleType name="ISOCODE639-3">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ara">
+        <xs:annotation>
+          <xs:documentation>Arabic</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="rus">
+        <xs:annotation>
+          <xs:documentation>Russian</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="esp">
+        <xs:annotation>
+          <xs:documentation>Spanish</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zho">
+        <xs:annotation>
+          <xs:documentation>Chinese Mandarin</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="zul">
+        <xs:annotation>
+          <xs:documentation>Zulu</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+	  </xs:restriction>
+  </xs:simpleType>
+
+  <!--  The notation selection corresponds to the example languages   -->
+
+  <xs:simpleType name="globalNotationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Arabic Unvoweled"/>
+      <xs:enumeration value="Arabic Voweled"/>
+      <xs:enumeration value="Modified IPA"/>
+      <xs:enumeration value="Pinyin"/>
+      <xs:enumeration value="Pinyin + Tone"/>
+      <xs:enumeration value="Han Simplified"/>
+      <xs:enumeration value="Han Traditional"/>
+      <xs:enumeration value="Russian Cyrillic"/>
+      <xs:enumeration value="Russian Cyrillic Stressed"/>
+      <xs:enumeration value="Spanish"/>
+      <xs:enumeration value="Spanish Unaccented"/>
+      <xs:enumeration value="Zulu"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:attribute name="notation" type="globalNotationType"/>
+
+  <xs:complexType name="OrthographiesType">
+    <xs:sequence>
+      <xs:element ref="Orthography" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Orthographies" type="OrthographiesType"/>
+  <xs:complexType name="OrthographyType">
+    <xs:sequence>
+      <xs:element name="char" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute ref="xml:lang" use="required"/>
+    <xs:attribute ref="script" use="required"/>
+    <xs:attribute ref="notation" use="required"/>
+  </xs:complexType>
+  <xs:element name="Orthography" type="OrthographyType"/>
+
+<!--  The script code selection corresponds to the example languages   -->
+
+  <xs:simpleType name="ISOCODE15924">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Arab"/>
+      <xs:enumeration value="Cyrl"/>
+      <xs:enumeration value="Hani"/>
+      <xs:enumeration value="Hans"/>
+      <xs:enumeration value="Hant"/>
+      <xs:enumeration value="Latn"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:attribute name="script" type="ISOCODE15924"/>
+
+  <!--  A few example domains -->
+
+  <xs:simpleType name="DomainType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="agriculture"/>
+      <xs:enumeration value="anatomy"/>
+      <xs:enumeration value="architecture"/>
+      <xs:enumeration value="biology"/>
+      <xs:enumeration value="cartography"/>
+      <xs:enumeration value="diplomacy"/>
+      <xs:enumeration value="economics"/>
+      <xs:enumeration value="finance"/>
+      <xs:enumeration value="lexicography"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Domain" type="DomainType"/>
+</xs:schema>

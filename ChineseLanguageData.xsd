@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Document   : chineseLanguageData.xsd
+
+    Description:
+
+	   The LanguageData files contain information about parts of speech, grammatical features. dialects, orthographic representations, and
+	other relevant metadata that is specific for a given language.  The LBX examples include five languages that provide examples of a 
+	variety of features across different languages and language families  -->
+        
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified"
+targetNamespace="http://www.zhold.com/ChineseLanguageData" 
+xmlns="http://www.zhold.com/ChineseLanguageData" xmlns:zhold="http://www.zhold.com/ChineseLanguageData"
+xmlns:meta="http://www.meta.com/Meta">
+
+	<xs:include schemaLocation="grammarDataCatalogue.xsd"/>
+
+	<xs:include schemaLocation="GlobalInformation.xsd"/>
+	
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+
+	<xs:import namespace="http://www.meta.com/Meta" schemaLocation="Meta.xsd"/>
+
+
+
+	<!--  LBX provides metadata intended to support application developers in the selection of which features to display    -->
+
+	<xs:simpleType name="partOfSpeechType">
+		<xs:restriction base="globalPartOfSpeechType">
+			<xs:enumeration value="noun">
+            <xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+            <xs:enumeration value="pronoun">
+			<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>			
+			<xs:enumeration value="verb">
+			<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="adjective">
+			<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+            <xs:enumeration value="adverb">
+			<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>			
+			<xs:enumeration value="preposition">
+            <xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+            <xs:enumeration value="conjunction">
+			<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+             <xs:enumeration value="measure word">
+			 <xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="determiner"/>
+			<xs:enumeration value="auxilliary word"/>
+			<xs:enumeration value="interjection"/>
+            <xs:enumeration value="number"/>
+            <xs:enumeration value="participle"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="POS" type="partOfSpeechType"/>
+
+	<xs:simpleType name="chineseScriptType">
+		<xs:restriction base="ISOCODE15924">
+			<xs:enumeration value="Hans"/>
+			<xs:enumeration value="Hant"/>
+			<xs:enumeration value="Latn"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attribute name="chineseScripts" type="chineseScriptType"/>
+
+
+	<xs:simpleType name="notationType">
+		<xs:restriction base="globalNotationType">
+			<xs:enumeration value="Han Simplified">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>true</meta:required>
+                            <meta:visible>true</meta:visible>
+							<meta:sample>汉语</meta:sample>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Pinyin">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>true</meta:required>
+							<meta:visible>true</meta:visible>
+							<meta:sample>HANYU</meta:sample>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Pinyin + Tone">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+							<meta:sample>HAN4 YU3</meta:sample>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Han Traditional">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+							<meta:sample>漢語</meta:sample>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attribute name="chineseOrthName" type="notationType"/>
+
+
+	<xs:complexType name="componentIndexType">
+		<xs:sequence>
+			<xs:element name="simplifiedRadicalNumber" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="traditionalRadicalNumber" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="componentIndex" type="componentIndexType"/>
+
+
+
+	<xs:simpleType name="nounSyntacticType">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="countable-noun"/>
+			<xs:enumeration value="mass-noun"/>
+			<xs:enumeration value="countable-mass-noun"/>
+			<xs:enumeration value="proper-noun"/>
+			<xs:enumeration value="collective-noun"/>
+			<xs:enumeration value="quantitative-noun"/>
+			<xs:enumeration value="definite-noun"/>
+			<xs:enumeration value="indefinite-noun"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attribute name="nounSyntacticType" type="nounSyntacticType"/>
+
+
+	<xs:complexType name="hanRadical">
+		<xs:sequence>
+			<xs:element name="RadicalNumber"/>
+			<xs:element name="TotalStrokes"/>
+			<xs:element name="ResidualStrokes"/>
+		</xs:sequence>
+		<xs:attribute name="hanRadicalNumber" type="xs:integer" use="required"/>
+		<xs:attribute ref="xml:lang" use="required"/>
+		<xs:attribute ref="script" use="required"/>
+		<xs:attribute name="radicalType">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Simplified"/>
+					<xs:enumeration value="Traditional"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+
+	    <!--  Examples of some commonly recognized dialects are presented as examples.  Dialects included in an actual system
+	would depend on the design goals of the developer.   --> 
+
+	<xs:simpleType name="Dialect">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Mandarin">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Cantonese">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Shanghai">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Dialect" type="Dialect"/>
+
+</xs:schema>

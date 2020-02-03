@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Document   : zuluLanguageData.xsd
+
+Description: 
+
+     The LanguageData files contain information about parts of speech, grammatical features. dialects, orthographic representations, and
+	other relevant metadata that is specific for a given language.  The LBX examples include five languages that provide examples of a 
+	variety of features across different languages and language families  -->
+
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified"
+targetNamespace="http://www.zulld.com/ZuluLanguageData"
+xmlns="http://www.zulld.com/ZuluLanguageData" xmlns:zulld="http://www.zulld.com/ZuluLanguageData"
+xmlns:meta="http://www.meta.com/Meta">
+
+
+
+	<xs:include schemaLocation="grammarDataCatalogue.xsd"/>
+	<xs:include schemaLocation="GlobalInformation.xsd"/>
+	
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+
+		<!--  LBX provides metadata intended to support application developers in the selection of which features to display    -->
+
+	<xs:simpleType name="partOfSpeechType">
+		<xs:restriction base="globalPartOfSpeechType">
+			<xs:enumeration value="noun"/> 
+			<xs:enumeration value="verb"/>
+			<xs:enumeration value="auxilliary verb"/>
+			<xs:enumeration value="deficient verb"/>
+			<xs:enumeration value="adjective"/>
+			<xs:enumeration value="preposition"/>
+			<xs:enumeration value="pronoun"/>
+			<xs:enumeration value="personal pronoun"/>
+			<xs:enumeration value="conjunction"/>
+			<xs:enumeration value="interjection"/>
+			<xs:enumeration value="adjective"/>
+			<xs:enumeration value="indefinite adjective"/>
+			<xs:enumeration value="adverb"/>
+			<xs:enumeration value="ideophone"/>
+			<xs:enumeration value="locative adverb"/>
+			<xs:enumeration value="locative demonstrative copulative"/>
+			<xs:enumeration value="locative"/>
+			<xs:enumeration value="particle"/>
+			<xs:enumeration value="possessive"/>
+			<xs:enumeration value="verb intransitive"/>
+			<xs:enumeration value="vocative noun"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="POS" type="partOfSpeechType"/>
+
+
+    <!--  The following schema sections provide a grammatical feature structure specific to a given language.  Designers should
+	always refer to the ISO grammatical feature structure standard for feature structure design.  An alternate approach to lexical
+	design would be for an application to call out to an ISO compliant feature structure.  W3C schema present certain challenges
+	in designing feature structures, but advantages in schema consistency for the purpose of validate language resource schema.
+	
+	Unique grammatical features include Bantu classes.  In addition, there is more metadata about affixes and morphemes given
+	the agglutinative nature of Zulu. 
+	
+	In all cases it should be noted that the example feature structures may not be complete or linguistically correct   --> 
+
+
+	<xs:complexType name="grammaticalFeaturesType">
+		<xs:sequence>
+			<xs:element ref="grammaticalClass" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="grammaticalClassGroup" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="grammaticalNumber" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="grammaticalVoice" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="grammaticalAspect" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="grammaticalFeatures" type="grammaticalFeaturesType"/>
+	
+	<xs:element name="grammaticalClass" type="grammaticalClassType"/>
+	<xs:element name="grammaticalClassGroup" type="grammaticalClassGroupType"/>
+
+
+	
+	<xs:simpleType name="grammaticalClassType"> 
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="1"/>
+      <xs:enumeration value="2"/>
+      <xs:enumeration value="1a"/>
+      <xs:enumeration value="2a"/>
+	  <xs:enumeration value="3"/>
+	  <xs:enumeration value="4"/>
+	  <xs:enumeration value="5"/>
+	  <xs:enumeration value="6"/>
+	  <xs:enumeration value="7"/>
+	  <xs:enumeration value="8"/>
+	  <xs:enumeration value="9"/>
+	  <xs:enumeration value="9a"/>
+	  <xs:enumeration value="10"/>
+	  <xs:enumeration value="11"/>
+	  <xs:enumeration value="12"/>
+	  <xs:enumeration value="14"/>
+	  <xs:enumeration value="15"/>
+	  <xs:enumeration value="17"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:simpleType name="grammaticalClassGroupType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="1-2"/>
+	  <xs:enumeration value="1-10"/>
+      <xs:enumeration value="1a-2a"/>
+	  <xs:enumeration value="1a-8"/>
+	  <xs:enumeration value="1a-10"/>
+	  <xs:enumeration value="1a"/>
+	  <xs:enumeration value="2"/>
+	  <xs:enumeration value="3"/>
+	  <xs:enumeration value="3-4"/>
+	  <xs:enumeration value="4"/>
+	  <xs:enumeration value="3-8"/>
+	  <xs:enumeration value="4-5"/>
+	  <xs:enumeration value="5-6"/>
+	  <xs:enumeration value="5-8"/>
+	  <xs:enumeration value="5-10"/>
+	  <xs:enumeration value="6"/>
+	  <xs:enumeration value="7-8"/>
+	  <xs:enumeration value="7-6"/>
+	  <xs:enumeration value="8"/>
+	  <xs:enumeration value="9-6"/>
+	  <xs:enumeration value="9-8"/>
+	  <xs:enumeration value="9-10"/>
+	  <xs:enumeration value="9"/>
+	  <xs:enumeration value="10"/>
+	  <xs:enumeration value="11-6"/>
+	  <xs:enumeration value="11-8"/>
+	  <xs:enumeration value="11-10"/>
+	  <xs:enumeration value="11"/>
+	  <xs:enumeration value="12"/>
+	  <xs:enumeration value="14"/>
+	  <xs:enumeration value="15"/>
+	  <xs:enumeration value="17"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+	<xs:simpleType name="grammaticalNumberType">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="singular"/>
+			<xs:enumeration value="plural"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="grammaticalNumber" type="grammaticalNumberType"/>
+
+	<xs:simpleType name="grammaticalVoiceType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="passive"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="grammaticalVoice" type="grammaticalVoiceType"/>
+
+	<xs:simpleType name="grammaticalAspectType">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="perfective"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="grammaticalAspect" type="grammaticalAspectType"/>
+
+
+<xs:complexType name="partFeaturesType">
+		<xs:sequence>
+			<xs:element ref="suffixFeatures" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+<xs:element name="partFeatures" type="partFeaturesType"/>
+	
+
+
+		<xs:simpleType name="suffixFeaturesType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="present suffix"/>
+			<xs:enumeration value="perfective suffix"/>
+			<xs:enumeration value="suffix"/>
+			<xs:enumeration value="causative suffix"/>
+		</xs:restriction>
+	</xs:simpleType>
+   <xs:element name="suffixFeatures" type="suffixFeaturesType"/>
+
+<xs:simpleType name="prefixFeaturesType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="infinitive prefix"/>
+			<xs:enumeration value="noun prefix"/>
+		</xs:restriction>
+	</xs:simpleType>
+   <xs:element name="prefixFeatures" type="prefixFeaturesType"/>
+
+     <xs:simpleType name="rootFeaturesType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="present root"/>
+			<xs:enumeration value="base verb present root"/>
+			<xs:enumeration value="perfective root"/>
+		</xs:restriction>
+	</xs:simpleType>
+   <xs:element name="rootFeatures" type="rootFeaturesType"/>
+
+ <xs:simpleType name="infixFeaturesType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="object infix"/>
+		</xs:restriction>
+	</xs:simpleType>
+   <xs:element name="infixFeatures" type="infixFeaturesType"/>
+
+<!--   No dialect examples have been provided for Zulu   -->
+
+
+	<xs:simpleType name="Dialect">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="unspecified dialect"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Dialect" type="Dialect"/>
+
+
+	<!--  the orthName provides a method for improved management of variant orthographies, supplementing
+	language and script codes.  An example of an orthography name would be "Pinyin" romanization, which
+	uses unique, standard orthographical rules   -->
+
+
+	<xs:simpleType name="notationType">
+		<xs:restriction base="globalNotationType">
+			<xs:enumeration value="Zulu">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>true</meta:required>
+							<meta:visible>true</meta:visible>
+							<meta:sample>isiZulu</meta:sample>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attribute name="zuluOrthName" type="notationType"/>
+
+</xs:schema>

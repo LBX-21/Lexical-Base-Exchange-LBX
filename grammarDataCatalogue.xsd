@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!--
+
+    Document   : 
+
+    Created on : 
+
+    Author     : 
+    Description:
+        Purpose of XML Schema document follows.
+
+
+        The grammarDataCatalogue contains an aggregate list of grammatical features, parts of speech, dialects, and other language
+		related information found in LanguageData files.  The main purpose is to avoid redundancy, facilitate design of consistent features
+		and labels, enforce consistency in spelling across the LanguageData files.  This example contains parts of speech found in the five
+		 example LanguageData files   -->
+
+       
+
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+      <xs:simpleType name="globalPartOfSpeechType">
+	  <xs:restriction base="xs:string">
+	    <xs:enumeration value="noun"/>
+            <xs:enumeration value="adjective"/>
+			<xs:enumeration value="adjective satellite"/>
+			<xs:enumeration value="adverb"/>
+			<xs:enumeration value="adverbial"/>
+			<xs:enumeration value="article"/>
+			<xs:enumeration value="auxilliary verb"/>
+			<xs:enumeration value="auxilliary word"/>
+            <xs:enumeration value="comparative adjective"/>
+	        <xs:enumeration value="conjunction"/>
+			<xs:enumeration value="deficient verb"/>
+			<xs:enumeration value="determiner"/>
+			<xs:enumeration value="exclamation"/>
+			<xs:enumeration value="gerund"/>
+			<xs:enumeration value="ideophone"/>
+            <xs:enumeration value="indefinite adjective"/>
+            <xs:enumeration value="interjection"/>
+			<xs:enumeration value="locative"/>
+			<xs:enumeration value="locative adverb"/>
+			<xs:enumeration value="locative demonstrative copulative"/>
+			<xs:enumeration value="locative demonstrative pronoun"/>
+			<xs:enumeration value="measure word"/>
+			<xs:enumeration value="number"/>
+			<xs:enumeration value="participle"/>
+			<xs:enumeration value="particle"/>
+			<xs:enumeration value="personal pronoun"/>
+			<xs:enumeration value="possessive"/>
+			<xs:enumeration value="postposition"/>
+			<xs:enumeration value="preposition"/>
+            <xs:enumeration value="pronoun"/>
+			<xs:enumeration value="verb"/>
+			<xs:enumeration value="verbal noun"/>
+			<xs:enumeration value="verb intransitive"/>
+			<xs:enumeration value="vocative noun"/>
+        </xs:restriction>
+        </xs:simpleType>
+
+</xs:schema>
+

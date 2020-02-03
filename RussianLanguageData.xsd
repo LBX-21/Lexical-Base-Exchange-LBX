@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Document   : RussianLanguageData.xsd
+
+Purpose of XML Schema document follows.
+
+
+     The LanguageData files contain information about parts of speech, grammatical features. dialects, orthographic representations, and
+	other relevant metadata that is specific for a given language.  The LBX examples include five language that provide examples of a 
+	variety of features across different languages and language families  -->
+
+	<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified"
+	targetNamespace="http://www.rusld.com/RussianLanguageData"
+	xmlns="http://www.rusld.com/RussianLanguageData" xmlns:rusld="http://www.rusld.com/RussianLanguageData" 
+	xmlns:meta="http://www.meta.com/Meta">
+
+
+		<xs:include schemaLocation="grammarDataCatalogue.xsd"/>
+		<xs:include schemaLocation="GlobalInformation.xsd"/>
+		<xs:import namespace="http://www.meta.com/Meta" schemaLocation="Meta.xsd"/>
+		
+		<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+
+		<!--  LBX provides metadata intended to support application developers in the selection of which features to display    -->
+
+
+		<xs:simpleType name="partOfSpeechType">
+			<xs:restriction base="globalPartOfSpeechType">
+				<xs:enumeration value="noun">
+					<xs:annotation>
+						<xs:appinfo>
+							<meta:appMetadata>
+								<meta:required>false</meta:required>
+								<meta:visible>true</meta:visible>
+							</meta:appMetadata>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="verb">
+					<xs:annotation>
+						<xs:appinfo>
+							<meta:appMetadata>
+								<meta:required>false</meta:required>
+								<meta:visible>true</meta:visible>
+							</meta:appMetadata>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="adjective">
+					<xs:annotation>
+						<xs:appinfo>
+							<meta:appMetadata>
+								<meta:required>false</meta:required>
+								<meta:visible>true</meta:visible>
+							</meta:appMetadata>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="pronoun">
+					<xs:annotation>
+						<xs:appinfo>
+							<meta:appMetadata>
+								<meta:required>false</meta:required>
+								<meta:visible>true</meta:visible>
+							</meta:appMetadata>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="preposition">
+					<xs:annotation>
+						<xs:appinfo>
+							<meta:appMetadata>
+								<meta:required>false</meta:required>
+								<meta:visible>true</meta:visible>
+							</meta:appMetadata>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="conjunction">
+					<xs:annotation>
+						<xs:appinfo>
+							<meta:appMetadata>
+								<meta:required>false</meta:required>
+								<meta:visible>true</meta:visible>
+							</meta:appMetadata>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="adverb">
+					<xs:annotation>
+						<xs:appinfo>
+							<meta:appMetadata>
+								<meta:required>false</meta:required>
+								<meta:visible>true</meta:visible>
+							</meta:appMetadata>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="interjection">
+					<xs:annotation>
+						<xs:appinfo>
+							<meta:appMetadata>
+								<meta:required>false</meta:required>
+								<meta:visible>true</meta:visible>
+							</meta:appMetadata>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				<xs:enumeration value="exclamation">
+					<xs:annotation>
+						<xs:appinfo>
+							<meta:appMetadata>
+								<meta:required>false</meta:required>
+								<meta:visible>true</meta:visible>
+							</meta:appMetadata>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+		<xs:element name="POS" type="partOfSpeechType"/>
+
+
+    <!--  The following schema sections provide a grammatical feature structure specific to a given language.  Designers should
+	always refer to the ISO grammatical feature structure standard for feature structure design.  An alternate approach to lexical
+	design would be for an application to call out to an ISO compliant feature structure.  W3C schema present certain challenges
+	in designing feature structures, but advantages in schema consistency for the purpose of validate language resource schema 
+	
+	In all cases it should be noted that the example feature structures may not be complete or linguistically correct   -->
+
+
+		<xs:complexType name="grammaticalFeaturesType">
+			<xs:sequence>
+				<xs:element ref="grammaticalPerson" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="grammaticalGender" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="grammaticalNumber" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="grammaticalTense" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="grammaticalAspect" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="grammaticalMood" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="grammaticalVoice" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="grammaticalCase" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="grammaticalAnimacy" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="Verbal" minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+		<xs:element name="grammaticalFeatures" type="grammaticalFeaturesType"/>
+
+
+		<xs:element name="grammaticalPerson" type="grammaticalPersonType"/>
+		<xs:element name="grammaticalGender" type="grammaticalGenderType"/>
+		<xs:element name="grammaticalNumber" type="grammaticalNumberType"/>
+		<xs:element name="grammaticalTense" type="grammaticalTenseType"/>
+		<xs:element name="grammaticalAspect" type="grammaticalAspectType"/>
+		<xs:element name="grammaticalMood" type="grammaticalMoodType"/>
+		<xs:element name="grammaticalVoice" type="grammaticalVoiceType"/>
+		<xs:element name="grammaticalCase" type="grammaticalCaseType"/>
+		<xs:element name="grammaticalAnimacy" type="grammaticalAnimacyType"/>
+		<xs:element name="Verbal" type="VerbalType"/>
+
+		<xs:complexType name="nounFeatures">
+			<xs:annotation>
+				<xs:appinfo>
+					<meta:appMetadata>
+						<meta:POS>noun</meta:POS>
+					</meta:appMetadata>
+				</xs:appinfo>
+			</xs:annotation>
+			<xs:complexContent>
+				<xs:restriction base="grammaticalFeaturesType">
+					<xs:sequence>
+						<xs:element ref="grammaticalGender" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="grammaticalNumber" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="grammaticalCase" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="grammaticalAnimacy" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:restriction>
+			</xs:complexContent>
+		</xs:complexType>
+
+		<xs:complexType name="verbFeatures">
+			<xs:annotation>
+				<xs:appinfo>
+					<meta:appMetadata>
+						<meta:POS>verb</meta:POS>
+					</meta:appMetadata>
+				</xs:appinfo>
+			</xs:annotation>
+			<xs:complexContent>
+				<xs:restriction base="grammaticalFeaturesType">
+					<xs:sequence>
+						<xs:element ref="grammaticalPerson" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="grammaticalNumber" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="grammaticalTense" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="grammaticalAspect" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="grammaticalMood" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="grammaticalVoice" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="Verbal" minOccurs="0" maxOccurs="1"/>
+					</xs:sequence>
+				</xs:restriction>
+			</xs:complexContent>
+		</xs:complexType>
+
+		<xs:simpleType name="grammaticalGenderType">
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="masculine"/>
+				<xs:enumeration value="feminine"/>
+				<xs:enumeration value="neuter"/>
+			</xs:restriction>
+		</xs:simpleType>
+
+		<xs:simpleType name="grammaticalPersonType">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="firstPerson"/>
+				<xs:enumeration value="secondPerson"/>
+				<xs:enumeration value="thirdPerson"/>
+			</xs:restriction>
+		</xs:simpleType>
+
+		<xs:simpleType name="grammaticalNumberType">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="singular"/>
+				<xs:enumeration value="plural"/>
+			</xs:restriction>
+		</xs:simpleType>
+
+		<xs:simpleType name="grammaticalTenseType">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="past"/>
+				<xs:enumeration value="present"/>
+			</xs:restriction>
+		</xs:simpleType>
+
+		<xs:simpleType name="grammaticalAspectType">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="perfective"/>
+				<xs:enumeration value="imperfective"/>
+				<xs:enumeration value="imperfective and perfective"/>
+			</xs:restriction>
+		</xs:simpleType>
+
+		<xs:simpleType name="grammaticalCaseType">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="nominative"/>
+				<xs:enumeration value="genitive"/>
+				<xs:enumeration value="dative"/>
+				<xs:enumeration value="instrumental"/>
+				<xs:enumeration value="accusative"/>
+				<xs:enumeration value="locative"/>
+			</xs:restriction>
+		</xs:simpleType>
+
+		<xs:simpleType name="grammaticalAnimacyType">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="animate"/>
+				<xs:enumeration value="inanimate"/>
+			</xs:restriction>
+		</xs:simpleType> 
+
+		<xs:simpleType name="grammaticalVoiceType">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="active"/>
+				<xs:enumeration value="reflexive"/>
+				<xs:enumeration value="passive"/>
+			</xs:restriction>
+		</xs:simpleType>
+
+		<xs:simpleType name="grammaticalMoodType">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="indicative"/>
+				<xs:enumeration value="imperative"/>
+                <xs:enumeration value="conditional"/>
+			</xs:restriction>
+		</xs:simpleType>
+
+		<xs:simpleType name="VerbalType">
+			<xs:restriction base="xs:string">
+			    <xs:enumeration value="infinitive"/>
+				<xs:enumeration value="gerund"/>
+				<xs:enumeration value="participle"/>
+			</xs:restriction>
+		</xs:simpleType>
+
+		<xs:simpleType name="nounSyntacticType">
+			<xs:restriction base="xs:NMTOKEN">
+				<xs:enumeration value="countable-noun"/>
+				<xs:enumeration value="mass-noun"/>
+				<xs:enumeration value="countable-mass-noun"/>
+				<xs:enumeration value="proper-noun"/>
+				<xs:enumeration value="collective-noun"/>
+				<xs:enumeration value="quantitative-noun"/>
+				<xs:enumeration value="definite-noun"/>
+				<xs:enumeration value="indefinite-noun"/>
+			</xs:restriction>
+		</xs:simpleType>
+		<xs:attribute name="nounSyntacticType" type="nounSyntacticType"/>
+
+		<!--  No dialect examples have been provided  -->
+
+		<xs:simpleType name="dialect">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="unspecified dialect">
+					<xs:annotation>
+						<xs:appinfo>
+							<meta:appMetadata>
+								<meta:required>false</meta:required>
+								<meta:visible>true</meta:visible>
+							</meta:appMetadata>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+				</xs:restriction>
+				</xs:simpleType>
+<xs:element name="Dialect" type="dialect"/>
+
+
+	<!--  the notation provides a method for improved management of variant orthographies, supplementing
+	language and script codes.  An example of an orthography name would be "Pinyin" romanization, which
+	uses unique, standard orthographical rules   -->
+
+ <xs:simpleType name="notationType">
+		<xs:restriction base="globalNotationType">
+			<xs:enumeration value="Russian Cyrillic">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>true</meta:required>
+							<meta:visible>true</meta:visible>
+							<meta:sample>русский</meta:sample>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+				<xs:enumeration value="Russian Cyrillic Stressed">
+					<xs:annotation>
+						<xs:appinfo>
+							<meta:appMetadata>
+								<meta:required>false</meta:required>
+								<meta:visible>true</meta:visible>
+								<meta:sample>ру'сский</meta:sample>
+							</meta:appMetadata>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:enumeration>
+			</xs:restriction>
+		</xs:simpleType>
+		<xs:attribute name="russianNotation" type="notationType"/>
+
+	</xs:schema>

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Document   : arabicLanguageData.xsd
+    Description:
+        Purpose of XML Schema document follows.
+
+     The LanguageData files contain information about parts of speech, grammatical features. dialects, orthographic representations, and
+	other relevant metadata that is specific for a given language.  The LBX examples include five language that provide a examples of a 
+	variety of features across different languages and language families  -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified"
+targetNamespace="http://www.arald.com/ArabicLanguageData"
+xmlns="http://www.arald.com/ArabicLanguageData" xmlns:arald="http://www.arald.com/ArabicLanguageData"
+           xmlns:meta="http://www.meta.com/Meta">
+
+
+	
+      <xs:include schemaLocation="grammarDataCatalogue.xsd"/>
+	<xs:include schemaLocation="GlobalInformation.xsd"/>
+	<xs:import namespace="http://www.meta.com/Meta" schemaLocation="Meta.xsd"/>
+
+	<!--  LBX provides metadata intended to support application developers in the selection of which features to display    -->
+	
+
+	<xs:simpleType name="partOfSpeechType">
+		<xs:restriction base="globalPartOfSpeechType">
+			<xs:enumeration value="noun">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="pronoun">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="verb">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="verbal noun">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="adjective">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+							<meta:sample>كبير</meta:sample>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+            <xs:enumeration value="comparative adjective">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>false</meta:visible>
+							<meta:sample>اكبر</meta:sample>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+
+            <xs:enumeration value="adjective satellite">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>false</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="adverb">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+							<meta:sample>كثيراً</meta:sample>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+
+           <xs:enumeration value="adverbial">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>false</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="preposition">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="conjunction">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="interjection">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="article">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+							<meta:sample>ال</meta:sample>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			
+			<xs:enumeration value="gerund"/>
+
+			<xs:enumeration value="participle"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="POS" type="partOfSpeechType"/>
+
+	<!--  the orthName provides a method for improved management of variant orthographies, supplementing
+	language and script codes.  An example of an orthography name would be "Pinyin" romanization, which
+	uses unique, standard orthographical rules   -->
+
+	<xs:simpleType name="notationType">
+		<xs:restriction base="globalNotationType">
+            <xs:enumeration value="Arabic Unvoweled">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+						    <meta:script>Arab</meta:script>
+							<meta:required>true</meta:required>
+							<meta:visible>true</meta:visible>
+							<meta:sample>العربية</meta:sample>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Arabic Voweled">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+						    <meta:script>Arab</meta:script>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+							<meta:sample>العَرَبِيَّة</meta:sample>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+            <xs:enumeration value="Modified IPA">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+						    <meta:script>Latn</meta:script>
+							<meta:required>false</meta:required>
+							<meta:visible>false</meta:visible>
+							<meta:sample></meta:sample>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+       </xs:restriction>
+	</xs:simpleType>
+	<xs:attribute name="arabicOrthName" type="notationType"/>
+
+    <!--  The following schema sections provide a grammatical feature structure specific to a given language.  Designers should
+	always refer to the ISO grammatical feature structure standard for feature structure design.  An alternate approach to lexical
+	design would be for an application to call out to an ISO compliant feature structure.  W3C schema present certain challenges
+	in designing feature structures, but advantages in schema consistency for the purpose of validate language resource schema 
+	
+	In all cases it should be noted that the example feature structures may not be complete or linguistically correct   --> 
+
+
+     <xs:complexType name="grammaticalFeaturesType">
+		<xs:sequence>
+			<xs:element ref="grammaticalPerson" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="grammaticalGender" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="grammaticalNumber" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="grammaticalTense" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="grammaticalAspect" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="grammaticalMood" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="grammaticalVoice" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="Verbal" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="nounSyntacticType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="grammaticalFeatures" type="grammaticalFeaturesType"/>
+
+
+    <xs:element name="grammaticalPerson" type="grammaticalPersonType"/>
+    <xs:element name="grammaticalGender" type="grammaticalGenderType"/>
+    <xs:element name="grammaticalNumber" type="grammaticalNumberType"/>
+	<xs:element name="grammaticalTense" type="grammaticalTenseType"/>
+    <xs:element name="grammaticalAspect" type="grammaticalAspectType"/>
+    <xs:element name="grammaticalVoice" type="grammaticalVoiceType"/>
+    <xs:element name="grammaticalMood" type="grammaticalMoodType"/>
+    <xs:element name="Verbal" type="VerbalType"/>
+    <xs:element name="nounSyntacticType" type="nounSyntacticType"/>
+
+    <xs:complexType name="nounFeatures">
+		<xs:annotation>
+            <xs:appinfo>
+                  <meta:appMetadata>
+                        <meta:POS>noun</meta:POS>
+                  </meta:appMetadata>
+            </xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:restriction base="grammaticalFeaturesType">
+				<xs:sequence>
+					<xs:element ref="grammaticalGender" minOccurs="0" maxOccurs="1"/>
+					<xs:element ref="grammaticalNumber" minOccurs="0" maxOccurs="1"/>
+					<xs:element ref="nounSyntacticType" minOccurs="0" maxOccurs="1"/> 
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="verbFeatures">
+		<xs:annotation>
+            <xs:appinfo>
+                  <meta:appMetadata>
+                        <meta:POS>verb</meta:POS>
+                  </meta:appMetadata>
+            </xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:restriction base="grammaticalFeaturesType">
+				<xs:sequence>
+					<xs:element ref="grammaticalPerson" minOccurs="0" maxOccurs="1"/>
+					<xs:element ref="grammaticalNumber" minOccurs="0" maxOccurs="1"/>
+					<xs:element ref="grammaticalTense" minOccurs="0" maxOccurs="1"/>
+					<xs:element ref="grammaticalMood" minOccurs="0" maxOccurs="1"/>
+					<xs:element ref="grammaticalVoice" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:restriction>
+		</xs:complexContent>
+	</xs:complexType>
+	
+
+	<xs:simpleType name="grammaticalGenderType">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="masculine"/>
+			<xs:enumeration value="feminine"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="grammaticalPersonType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="firstPerson"/>
+			<xs:enumeration value="secondPerson"/>
+			<xs:enumeration value="thirdPerson"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:simpleType name="grammaticalNumberType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="singular"/>
+			<xs:enumeration value="plural"/>
+			<xs:enumeration value="dual"/> 
+		</xs:restriction>
+	</xs:simpleType>
+
+    <xs:simpleType name="VerbalType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="gerund"/> 
+			<xs:enumeration value="verbal noun"/>
+			<xs:enumeration value="participle"/>
+			<xs:enumeration value="active participle"/>
+			<xs:enumeration value="passive participle"/>
+			<xs:enumeration value="infinitive"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="grammaticalVoiceType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="active"/>
+			<xs:enumeration value="passive"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:simpleType name="grammaticalMoodType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="indicative"/>
+			<xs:enumeration value="subjunctive"/>
+            <xs:enumeration value="imperative"/>
+            <xs:enumeration value="jussive"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="grammaticalTenseType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="future"/>
+            <xs:enumeration value="past"/>
+			<xs:enumeration value="present"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="grammaticalAspectType">
+		<xs:restriction base="xs:string">
+            <xs:enumeration value="perfect"/>
+            <xs:enumeration value="imperfect"/>
+			<xs:enumeration value="collective-noun"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="nounSyntacticType">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="countable-noun"/>
+			<xs:enumeration value="mass-noun"/>
+			<xs:enumeration value="countable-mass-noun"/>
+			<xs:enumeration value="proper-noun"/>
+			<xs:enumeration value="collective-noun"/>
+			<xs:enumeration value="quantitative-noun"/>
+			<xs:enumeration value="definite-noun"/>
+			<xs:enumeration value="indefinite-noun"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+    <!--  Examples of some commonly recognized dialects are presented as examples.  Dialects included in an actual system
+	would depend on the design goals of the developer.   --> 
+
+	<xs:simpleType name="Dialect">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Egyptian">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Gulf">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Levantine">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Magrebi">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Modern Standard Arabic">
+				<xs:annotation>
+					<xs:appinfo>
+						<meta:appMetadata>
+							<meta:required>false</meta:required>
+							<meta:visible>true</meta:visible>
+						</meta:appMetadata>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Dialect" type="Dialect"/>
+
+</xs:schema>
