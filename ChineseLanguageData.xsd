@@ -14,7 +14,7 @@ targetNamespace="http://www.zhold.com/ChineseLanguageData"
 xmlns="http://www.zhold.com/ChineseLanguageData" xmlns:zhold="http://www.zhold.com/ChineseLanguageData"
 xmlns:meta="http://www.meta.com/Meta">
 
-	<xs:include schemaLocation="grammarDataCatalogue.xsd"/>
+	<!--   <xs:include schemaLocation="grammarDataCatalogue.xsd"/>   -->
 
 	<xs:include schemaLocation="GlobalInformation.xsd"/>
 	

@@ -17,7 +17,8 @@ xmlns:meta="http://www.meta.com/Meta">
 
 
 
-	<xs:include schemaLocation="grammarDataCatalogue.xsd"/>
+	<!--   <xs:include schemaLocation="grammarDataCatalogue.xsd"/>   -->
+	
 	<xs:include schemaLocation="GlobalInformation.xsd"/>
 	
 	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>

@@ -16,7 +16,7 @@ Purpose of XML Schema document follows.
 	xmlns:meta="http://www.meta.com/Meta">
 
 
-		<xs:include schemaLocation="grammarDataCatalogue.xsd"/>
+	<!--	<xs:include schemaLocation="grammarDataCatalogue.xsd"/>   -->
 		<xs:include schemaLocation="GlobalInformation.xsd"/>
 		<xs:import namespace="http://www.meta.com/Meta" schemaLocation="Meta.xsd"/>
 		

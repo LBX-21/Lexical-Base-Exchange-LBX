@@ -17,7 +17,7 @@
 	xmlns:meta="http://www.meta.com/Meta">
     
 
-    <xs:include schemaLocation="grammarDataCatalogue.xsd"/>
+   <!--  <xs:include schemaLocation="grammarDataCatalogue.xsd"/>   -->
     
     <xs:include schemaLocation="GlobalInformation.xsd"/>
 
@@ -166,6 +166,7 @@
     
     <xs:complexType name="grammaticalFeaturesType">
         <xs:sequence>
+        	<xs:element ref="POS" minOccurs="0" maxOccurs="1"/>
             <xs:element ref="grammaticalGender" minOccurs="0" maxOccurs="1"/>
             <xs:element ref="grammaticalPerson" minOccurs="0" maxOccurs="2"/>  
             <xs:element ref="grammaticalNumber" minOccurs="0" maxOccurs="1"/>

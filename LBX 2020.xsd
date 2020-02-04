@@ -50,7 +50,7 @@
 
   <!--  the grammarDataCatalogue contains a consolidated set of linguistic information from the individual LanguageData files.   -->
 
-  <xs:include schemaLocation="grammarDataCatalogue.xsd"/>
+  <!--   <xs:include schemaLocation="grammarDataCatalogue.xsd"/>   -->
 
 <!--  Part of Speech information   -->
 
