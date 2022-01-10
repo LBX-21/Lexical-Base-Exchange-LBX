@@ -23,8 +23,8 @@ xmlns="http://www.arald.com/ArabicLanguageData" xmlns:arald="http://www.arald.co
 	<!--  LBX provides metadata intended to support application developers in the selection of which features to display    -->
 	
 
-	<xs:simpleType name="partOfSpeechType">
-		<xs:restriction base="globalPartOfSpeechType">
+	<xs:simpleType name="PartOfSpeechType">
+		<xs:restriction base="GlobalPartOfSpeechType">
 			<xs:enumeration value="noun">
 				<xs:annotation>
 					<xs:appinfo>
@@ -173,8 +173,8 @@ xmlns="http://www.arald.com/ArabicLanguageData" xmlns:arald="http://www.arald.co
 	language and script codes.  An example of an orthography name would be "Pinyin" romanization, which
 	uses unique, standard orthographical rules   -->
 
-	<xs:simpleType name="notationType">
-		<xs:restriction base="globalNotationType">
+	<xs:simpleType name="NotationType">
+		<xs:restriction base="GlobalNotationType">
             <xs:enumeration value="Arabic Unvoweled">
 				<xs:annotation>
 					<xs:appinfo>
@@ -213,7 +213,7 @@ xmlns="http://www.arald.com/ArabicLanguageData" xmlns:arald="http://www.arald.co
 			</xs:enumeration>
        </xs:restriction>
 	</xs:simpleType>
-	<xs:attribute name="arabicOrthName" type="notationType"/>
+	<xs:attribute name="arabicOrthName" type="NotationType"/>
 
     <!--  The following schema sections provide a grammatical feature structure specific to a given language.  Designers should
 	always refer to the ISO grammatical feature structure standard for feature structure design.  An alternate approach to lexical
@@ -223,33 +223,33 @@ xmlns="http://www.arald.com/ArabicLanguageData" xmlns:arald="http://www.arald.co
 	In all cases it should be noted that the example feature structures may not be complete or linguistically correct   --> 
 
 
-     <xs:complexType name="grammaticalFeaturesType">
+     <xs:complexType name="GrammaticalFeaturesType">
 		<xs:sequence>
-			<xs:element ref="grammaticalPerson" minOccurs="0" maxOccurs="1"/>
-			<xs:element ref="grammaticalGender" minOccurs="0" maxOccurs="1"/>
-			<xs:element ref="grammaticalNumber" minOccurs="0" maxOccurs="1"/>
-			<xs:element ref="grammaticalTense" minOccurs="0" maxOccurs="1"/>
-			<xs:element ref="grammaticalAspect" minOccurs="0" maxOccurs="1"/>
-			<xs:element ref="grammaticalMood" minOccurs="0" maxOccurs="1"/>
-			<xs:element ref="grammaticalVoice" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Person" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Gender" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Number" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Tense" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Aspect" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Mood" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Voice" minOccurs="0" maxOccurs="1"/>
             <xs:element ref="Verbal" minOccurs="0" maxOccurs="1"/>
 			<xs:element ref="nounSyntacticType" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="grammaticalFeatures" type="grammaticalFeaturesType"/>
+	<xs:element name="GramFeats" type="GrammaticalFeaturesType"/>
 
 
-    <xs:element name="grammaticalPerson" type="grammaticalPersonType"/>
-    <xs:element name="grammaticalGender" type="grammaticalGenderType"/>
-    <xs:element name="grammaticalNumber" type="grammaticalNumberType"/>
-	<xs:element name="grammaticalTense" type="grammaticalTenseType"/>
-    <xs:element name="grammaticalAspect" type="grammaticalAspectType"/>
-    <xs:element name="grammaticalVoice" type="grammaticalVoiceType"/>
-    <xs:element name="grammaticalMood" type="grammaticalMoodType"/>
+    <xs:element name="Person" type="GrammaticalPersonType"/>
+    <xs:element name="Gender" type="GrammaticalGenderType"/>
+    <xs:element name="Number" type="GrammaticalNumberType"/>
+    <xs:element name="Tense" type="GrammaticalTenseType"/>
+    <xs:element name="Aspect" type="GrammaticalAspectType"/>
+    <xs:element name="Voice" type="GrammaticalVoiceType"/>
+    <xs:element name="Mood" type="GrammaticalMoodType"/>
     <xs:element name="Verbal" type="VerbalType"/>
-    <xs:element name="nounSyntacticType" type="nounSyntacticType"/>
+    <xs:element name="NounSyntacticType" type="NounSyntacticType"/>
 
-    <xs:complexType name="nounFeatures">
+    <xs:complexType name="NounFeatures">
 		<xs:annotation>
             <xs:appinfo>
                   <meta:appMetadata>
@@ -258,17 +258,17 @@ xmlns="http://www.arald.com/ArabicLanguageData" xmlns:arald="http://www.arald.co
             </xs:appinfo>
 		</xs:annotation>
 		<xs:complexContent>
-			<xs:restriction base="grammaticalFeaturesType">
+			<xs:restriction base="GrammaticalFeaturesType">
 				<xs:sequence>
-					<xs:element ref="grammaticalGender" minOccurs="0" maxOccurs="1"/>
-					<xs:element ref="grammaticalNumber" minOccurs="0" maxOccurs="1"/>
-					<xs:element ref="nounSyntacticType" minOccurs="0" maxOccurs="1"/> 
+					<xs:element ref="Gender" minOccurs="0" maxOccurs="1"/>
+					<xs:element ref="Number" minOccurs="0" maxOccurs="1"/>
+					<xs:element ref="SyntacticType" minOccurs="0" maxOccurs="1"/> 
 				</xs:sequence>
 			</xs:restriction>
 		</xs:complexContent>
 	</xs:complexType>
 
-	<xs:complexType name="verbFeatures">
+	<xs:complexType name="VerbFeatures">
 		<xs:annotation>
             <xs:appinfo>
                   <meta:appMetadata>
@@ -277,27 +277,27 @@ xmlns="http://www.arald.com/ArabicLanguageData" xmlns:arald="http://www.arald.co
             </xs:appinfo>
 		</xs:annotation>
 		<xs:complexContent>
-			<xs:restriction base="grammaticalFeaturesType">
+			<xs:restriction base="GrammaticalFeaturesType">
 				<xs:sequence>
-					<xs:element ref="grammaticalPerson" minOccurs="0" maxOccurs="1"/>
-					<xs:element ref="grammaticalNumber" minOccurs="0" maxOccurs="1"/>
-					<xs:element ref="grammaticalTense" minOccurs="0" maxOccurs="1"/>
-					<xs:element ref="grammaticalMood" minOccurs="0" maxOccurs="1"/>
-					<xs:element ref="grammaticalVoice" minOccurs="0" maxOccurs="1"/>
+					<xs:element ref="Person" minOccurs="0" maxOccurs="1"/>
+					<xs:element ref="Number" minOccurs="0" maxOccurs="1"/>
+					<xs:element ref="Tense" minOccurs="0" maxOccurs="1"/>
+					<xs:element ref="Mood" minOccurs="0" maxOccurs="1"/>
+					<xs:element ref="Voice" minOccurs="0" maxOccurs="1"/>
 				</xs:sequence>
 			</xs:restriction>
 		</xs:complexContent>
 	</xs:complexType>
 	
 
-	<xs:simpleType name="grammaticalGenderType">
+	<xs:simpleType name="GrammaticalGenderType">
 		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="masculine"/>
 			<xs:enumeration value="feminine"/>
 		</xs:restriction>
 	</xs:simpleType>
 
-	<xs:simpleType name="grammaticalPersonType">
+	<xs:simpleType name="GrammaticalPersonType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="firstPerson"/>
 			<xs:enumeration value="secondPerson"/>
@@ -306,7 +306,7 @@ xmlns="http://www.arald.com/ArabicLanguageData" xmlns:arald="http://www.arald.co
 	</xs:simpleType>
 
 
-	<xs:simpleType name="grammaticalNumberType">
+	<xs:simpleType name="GrammaticalNumberType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="singular"/>
 			<xs:enumeration value="plural"/>
@@ -325,7 +325,7 @@ xmlns="http://www.arald.com/ArabicLanguageData" xmlns:arald="http://www.arald.co
 		</xs:restriction>
 	</xs:simpleType>
 
-	<xs:simpleType name="grammaticalVoiceType">
+	<xs:simpleType name="GrammaticalVoiceType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="active"/>
 			<xs:enumeration value="passive"/>
@@ -333,7 +333,7 @@ xmlns="http://www.arald.com/ArabicLanguageData" xmlns:arald="http://www.arald.co
 	</xs:simpleType>
 
 
-	<xs:simpleType name="grammaticalMoodType">
+	<xs:simpleType name="GrammaticalMoodType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="indicative"/>
 			<xs:enumeration value="subjunctive"/>
@@ -342,7 +342,7 @@ xmlns="http://www.arald.com/ArabicLanguageData" xmlns:arald="http://www.arald.co
 		</xs:restriction>
 	</xs:simpleType>
 
-	<xs:simpleType name="grammaticalTenseType">
+	<xs:simpleType name="GrammaticalTenseType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="future"/>
             <xs:enumeration value="past"/>
@@ -350,7 +350,7 @@ xmlns="http://www.arald.com/ArabicLanguageData" xmlns:arald="http://www.arald.co
 		</xs:restriction>
 	</xs:simpleType>
 
-	<xs:simpleType name="grammaticalAspectType">
+	<xs:simpleType name="GrammaticalAspectType">
 		<xs:restriction base="xs:string">
             <xs:enumeration value="perfect"/>
             <xs:enumeration value="imperfect"/>
@@ -358,7 +358,7 @@ xmlns="http://www.arald.com/ArabicLanguageData" xmlns:arald="http://www.arald.co
 		</xs:restriction>
 	</xs:simpleType>
 
-	<xs:simpleType name="nounSyntacticType">
+	<xs:simpleType name="NounSyntacticType">
 		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="countable-noun"/>
 			<xs:enumeration value="mass-noun"/>
