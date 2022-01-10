@@ -25,8 +25,8 @@ xmlns:meta="http://www.meta.com/Meta">
 
 		<!--  LBX provides metadata intended to support application developers in the selection of which features to display    -->
 
-	<xs:simpleType name="partOfSpeechType">
-		<xs:restriction base="globalPartOfSpeechType">
+	<xs:simpleType name="PartOfSpeechType">
+		<xs:restriction base="GlobalPartOfSpeechType">
 			<xs:enumeration value="noun"/> 
 			<xs:enumeration value="verb"/>
 			<xs:enumeration value="auxilliary verb"/>
@@ -50,7 +50,7 @@ xmlns:meta="http://www.meta.com/Meta">
 			<xs:enumeration value="vocative noun"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:element name="POS" type="partOfSpeechType"/>
+	<xs:element name="POS" type="PartOfSpeechType"/>
 
 
     <!--  The following schema sections provide a grammatical feature structure specific to a given language.  Designers should
@@ -64,7 +64,7 @@ xmlns:meta="http://www.meta.com/Meta">
 	In all cases it should be noted that the example feature structures may not be complete or linguistically correct   --> 
 
 
-	<xs:complexType name="grammaticalFeaturesType">
+	<xs:complexType name="GrammaticalFeaturesType">
 		<xs:sequence>
 			<xs:element ref="grammaticalClass" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="grammaticalClassGroup" minOccurs="0" maxOccurs="unbounded"/>
@@ -73,14 +73,14 @@ xmlns:meta="http://www.meta.com/Meta">
 			<xs:element ref="grammaticalAspect" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="grammaticalFeatures" type="grammaticalFeaturesType"/>
+	<xs:element name="GramFeats" type="GrammaticalFeaturesType"/>
 	
-	<xs:element name="grammaticalClass" type="grammaticalClassType"/>
-	<xs:element name="grammaticalClassGroup" type="grammaticalClassGroupType"/>
+	<xs:element name="GrammaticalClass" type="GrammaticalClassType"/>
+	<xs:element name="GrammaticalClassGroup" type="GrammaticalClassGroupType"/>
 
 
 	
-	<xs:simpleType name="grammaticalClassType"> 
+	<xs:simpleType name="GrammaticalClassType"> 
     <xs:restriction base="xs:string">
       <xs:enumeration value="1"/>
       <xs:enumeration value="2"/>
@@ -103,11 +103,11 @@ xmlns:meta="http://www.meta.com/Meta">
     </xs:restriction>
   </xs:simpleType>
   
-  <xs:simpleType name="grammaticalClassGroupType">
+  <xs:simpleType name="GrammaticalClassGroupType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="1-2"/>
 	  <xs:enumeration value="1-10"/>
-      <xs:enumeration value="1a-2a"/>
+          <xs:enumeration value="1a-2a"/>
 	  <xs:enumeration value="1a-8"/>
 	  <xs:enumeration value="1a-10"/>
 	  <xs:enumeration value="1a"/>
@@ -140,27 +140,27 @@ xmlns:meta="http://www.meta.com/Meta">
     </xs:restriction>
   </xs:simpleType>
 
-	<xs:simpleType name="grammaticalNumberType">
+	<xs:simpleType name="GrammaticalNumberType">
 		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="singular"/>
 			<xs:enumeration value="plural"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:element name="grammaticalNumber" type="grammaticalNumberType"/>
+	<xs:element name="GrammaticalNumber" type="GrammaticalNumberType"/>
 
-	<xs:simpleType name="grammaticalVoiceType">
+	<xs:simpleType name="GrammaticalVoiceType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="passive"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:element name="grammaticalVoice" type="grammaticalVoiceType"/>
+	<xs:element name="Voice" type="GrammaticalVoiceType"/>
 
-	<xs:simpleType name="grammaticalAspectType">
+	<xs:simpleType name="GrammaticalAspectType">
 		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="perfective"/>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:element name="grammaticalAspect" type="grammaticalAspectType"/>
+	<xs:element name="Aspect" type="GrammaticalAspectType"/>
 
 
 <xs:complexType name="partFeaturesType">
@@ -222,7 +222,7 @@ xmlns:meta="http://www.meta.com/Meta">
 	uses unique, standard orthographical rules   -->
 
 
-	<xs:simpleType name="notationType">
+	<xs:simpleType name="NotationType">
 		<xs:restriction base="globalNotationType">
 			<xs:enumeration value="Zulu">
 				<xs:annotation>
@@ -237,6 +237,6 @@ xmlns:meta="http://www.meta.com/Meta">
 			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:attribute name="zuluOrthName" type="notationType"/>
+	<xs:attribute name="zuluOrthName" type="NotationType"/>
 
 </xs:schema>
