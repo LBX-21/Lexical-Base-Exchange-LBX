@@ -25,8 +25,8 @@ Purpose of XML Schema document follows.
 		<!--  LBX provides metadata intended to support application developers in the selection of which features to display    -->
 
 
-		<xs:simpleType name="partOfSpeechType">
-			<xs:restriction base="globalPartOfSpeechType">
+		<xs:simpleType name="PartOfSpeechType">
+			<xs:restriction base="GlobalPartOfSpeechType">
 				<xs:enumeration value="noun">
 					<xs:annotation>
 						<xs:appinfo>
@@ -130,35 +130,35 @@ Purpose of XML Schema document follows.
 	In all cases it should be noted that the example feature structures may not be complete or linguistically correct   -->
 
 
-		<xs:complexType name="grammaticalFeaturesType">
+		<xs:complexType name="GrammaticalFeaturesType">
 			<xs:sequence>
-				<xs:element ref="grammaticalPerson" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="grammaticalGender" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="grammaticalNumber" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="grammaticalTense" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="grammaticalAspect" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="grammaticalMood" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="grammaticalVoice" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="grammaticalCase" minOccurs="0" maxOccurs="1"/>
-				<xs:element ref="grammaticalAnimacy" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="Person" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="Gender" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="Number" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="Tense" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="Aspect" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="Mood" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="Voice" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="Case" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="Animacy" minOccurs="0" maxOccurs="1"/>
 				<xs:element ref="Verbal" minOccurs="0" maxOccurs="1"/>
 			</xs:sequence>
 		</xs:complexType>
-		<xs:element name="grammaticalFeatures" type="grammaticalFeaturesType"/>
+		<xs:element name="GrammaticalFeatures" type="GrammaticalFeaturesType"/>
 
 
-		<xs:element name="grammaticalPerson" type="grammaticalPersonType"/>
-		<xs:element name="grammaticalGender" type="grammaticalGenderType"/>
-		<xs:element name="grammaticalNumber" type="grammaticalNumberType"/>
-		<xs:element name="grammaticalTense" type="grammaticalTenseType"/>
-		<xs:element name="grammaticalAspect" type="grammaticalAspectType"/>
-		<xs:element name="grammaticalMood" type="grammaticalMoodType"/>
-		<xs:element name="grammaticalVoice" type="grammaticalVoiceType"/>
-		<xs:element name="grammaticalCase" type="grammaticalCaseType"/>
-		<xs:element name="grammaticalAnimacy" type="grammaticalAnimacyType"/>
+		<xs:element name="Person" type="GrammaticalPersonType"/>
+		<xs:element name="Gender" type="GrammaticalGenderType"/>
+		<xs:element name="Number" type="GrammaticalNumberType"/>
+		<xs:element name="Tense" type="GrammaticalTenseType"/>
+		<xs:element name="Aspect" type="GrammaticalAspectType"/>
+		<xs:element name="Mood" type="GrammaticalMoodType"/>
+		<xs:element name="Voice" type="GrammaticalVoiceType"/>
+		<xs:element name="Case" type="GrammaticalCaseType"/>
+		<xs:element name="Animacy" type="GrammaticalAnimacyType"/>
 		<xs:element name="Verbal" type="VerbalType"/>
 
-		<xs:complexType name="nounFeatures">
+		<xs:complexType name="NounFeatures">
 			<xs:annotation>
 				<xs:appinfo>
 					<meta:appMetadata>
@@ -167,18 +167,18 @@ Purpose of XML Schema document follows.
 				</xs:appinfo>
 			</xs:annotation>
 			<xs:complexContent>
-				<xs:restriction base="grammaticalFeaturesType">
+				<xs:restriction base="GrammaticalFeaturesType">
 					<xs:sequence>
-						<xs:element ref="grammaticalGender" minOccurs="0" maxOccurs="1"/>
-						<xs:element ref="grammaticalNumber" minOccurs="0" maxOccurs="1"/>
-						<xs:element ref="grammaticalCase" minOccurs="0" maxOccurs="1"/>
-						<xs:element ref="grammaticalAnimacy" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="Gender" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="Number" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="Case" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="Animacy" minOccurs="0" maxOccurs="1"/>
 					</xs:sequence>
 				</xs:restriction>
 			</xs:complexContent>
 		</xs:complexType>
 
-		<xs:complexType name="verbFeatures">
+		<xs:complexType name="VerbFeatures">
 			<xs:annotation>
 				<xs:appinfo>
 					<meta:appMetadata>
@@ -187,14 +187,14 @@ Purpose of XML Schema document follows.
 				</xs:appinfo>
 			</xs:annotation>
 			<xs:complexContent>
-				<xs:restriction base="grammaticalFeaturesType">
+				<xs:restriction base="GrammaticalFeaturesType">
 					<xs:sequence>
-						<xs:element ref="grammaticalPerson" minOccurs="0" maxOccurs="1"/>
-						<xs:element ref="grammaticalNumber" minOccurs="0" maxOccurs="1"/>
-						<xs:element ref="grammaticalTense" minOccurs="0" maxOccurs="1"/>
-						<xs:element ref="grammaticalAspect" minOccurs="0" maxOccurs="1"/>
-						<xs:element ref="grammaticalMood" minOccurs="0" maxOccurs="1"/>
-						<xs:element ref="grammaticalVoice" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="Person" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="Number" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="Tense" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="Aspect" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="Mood" minOccurs="0" maxOccurs="1"/>
+						<xs:element ref="Voice" minOccurs="0" maxOccurs="1"/>
 						<xs:element ref="Verbal" minOccurs="0" maxOccurs="1"/>
 					</xs:sequence>
 				</xs:restriction>
@@ -217,21 +217,21 @@ Purpose of XML Schema document follows.
 			</xs:restriction>
 		</xs:simpleType>
 
-		<xs:simpleType name="grammaticalNumberType">
+		<xs:simpleType name="GrammaticalNumberType">
 			<xs:restriction base="xs:string">
 				<xs:enumeration value="singular"/>
 				<xs:enumeration value="plural"/>
 			</xs:restriction>
 		</xs:simpleType>
 
-		<xs:simpleType name="grammaticalTenseType">
+		<xs:simpleType name="GrammaticalTenseType">
 			<xs:restriction base="xs:string">
 				<xs:enumeration value="past"/>
 				<xs:enumeration value="present"/>
 			</xs:restriction>
 		</xs:simpleType>
 
-		<xs:simpleType name="grammaticalAspectType">
+		<xs:simpleType name="GrammaticalAspectType">
 			<xs:restriction base="xs:string">
 				<xs:enumeration value="perfective"/>
 				<xs:enumeration value="imperfective"/>
@@ -239,7 +239,7 @@ Purpose of XML Schema document follows.
 			</xs:restriction>
 		</xs:simpleType>
 
-		<xs:simpleType name="grammaticalCaseType">
+		<xs:simpleType name="GrammaticalCaseType">
 			<xs:restriction base="xs:string">
 				<xs:enumeration value="nominative"/>
 				<xs:enumeration value="genitive"/>
@@ -250,14 +250,14 @@ Purpose of XML Schema document follows.
 			</xs:restriction>
 		</xs:simpleType>
 
-		<xs:simpleType name="grammaticalAnimacyType">
+		<xs:simpleType name="GrammaticalAnimacyType">
 			<xs:restriction base="xs:string">
 				<xs:enumeration value="animate"/>
 				<xs:enumeration value="inanimate"/>
 			</xs:restriction>
 		</xs:simpleType> 
 
-		<xs:simpleType name="grammaticalVoiceType">
+		<xs:simpleType name="GrammaticalVoiceType">
 			<xs:restriction base="xs:string">
 				<xs:enumeration value="active"/>
 				<xs:enumeration value="reflexive"/>
@@ -265,7 +265,7 @@ Purpose of XML Schema document follows.
 			</xs:restriction>
 		</xs:simpleType>
 
-		<xs:simpleType name="grammaticalMoodType">
+		<xs:simpleType name="GrammaticalMoodType">
 			<xs:restriction base="xs:string">
 				<xs:enumeration value="indicative"/>
 				<xs:enumeration value="imperative"/>
@@ -281,7 +281,7 @@ Purpose of XML Schema document follows.
 			</xs:restriction>
 		</xs:simpleType>
 
-		<xs:simpleType name="nounSyntacticType">
+		<xs:simpleType name="NounSyntacticType">
 			<xs:restriction base="xs:NMTOKEN">
 				<xs:enumeration value="countable-noun"/>
 				<xs:enumeration value="mass-noun"/>
@@ -293,7 +293,7 @@ Purpose of XML Schema document follows.
 				<xs:enumeration value="indefinite-noun"/>
 			</xs:restriction>
 		</xs:simpleType>
-		<xs:attribute name="nounSyntacticType" type="nounSyntacticType"/>
+		<xs:attribute name="nounSyntacticType" type="NounSyntacticType"/>
 
 		<!--  No dialect examples have been provided  -->
 
@@ -318,7 +318,7 @@ Purpose of XML Schema document follows.
 	language and script codes.  An example of an orthography name would be "Pinyin" romanization, which
 	uses unique, standard orthographical rules   -->
 
- <xs:simpleType name="notationType">
+ <xs:simpleType name="NotationType">
 		<xs:restriction base="globalNotationType">
 			<xs:enumeration value="Russian Cyrillic">
 				<xs:annotation>
@@ -344,6 +344,6 @@ Purpose of XML Schema document follows.
 				</xs:enumeration>
 			</xs:restriction>
 		</xs:simpleType>
-		<xs:attribute name="russianNotation" type="notationType"/>
+		<xs:attribute name="russianNotation" type="NotationType"/>
 
 	</xs:schema>
