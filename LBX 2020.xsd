@@ -66,26 +66,26 @@
 
   <xs:group name="GrammaticalFeatures">
     <xs:choice>
-      <xs:element ref="arald:grammaticalFeatures"/>
-      <xs:element ref="rusld:grammaticalFeatures"/>
-      <xs:element ref="espld:grammaticalFeatures"/>
-      <xs:element ref="zulld:grammaticalFeatures"/>
+      <xs:element ref="arald:GramFeats"/>
+      <xs:element ref="rusld:GramFeats"/>
+      <xs:element ref="espld:GramFeats"/>
+      <xs:element ref="zulld:GramFeats"/>
     </xs:choice>
   </xs:group>
 
 <!--  See LMF  for List of Components   -->
 
-  <xs:group name="componentIndex">
+  <xs:group name="ComponentIndex">
     <xs:choice>
-      <xs:element ref="zhold:componentIndex"/>
+      <xs:element ref="zhold:ComponentIndex"/>
     </xs:choice>
   </xs:group>
 
 <!-- Separate manage of affixes, morphemes, etc.   -->
 
-<xs:group name="partFeatures">
+<xs:group name="PartFeatures">
     <xs:choice>
-      <xs:element ref="zulld:partFeatures"/>
+      <xs:element ref="zulld:PartFeatures"/>
     </xs:choice>
   </xs:group>
 
@@ -170,7 +170,7 @@
       <xs:element ref="Note" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:attribute name="conjugationType" type="xs:string"/>
+  <xs:attribute name="ConjugationType" type="xs:string"/>
 
   <xs:element name="Conjugation" type="ConjugationType"/>
   <xs:complexType name="DeclensionType">
@@ -199,7 +199,7 @@
       <xs:element name="Subcat" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="Domain" minOccurs="0" maxOccurs="unbounded"/>
       <xs:group ref="Dialect" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:group ref="GrammaticalFeatures" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:group ref="GramFeats" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="MorphologyClass" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="Lemma" minOccurs="0" maxOccurs="1"/>
       <xs:element ref="WordForm" minOccurs="0" maxOccurs="unbounded"/>
@@ -252,7 +252,7 @@
       <xs:group ref="POS" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="Subcat" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="MorphologyClass" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:group ref="GrammaticalFeatures" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:group ref="GramFeats" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="FormRep" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="register" type="xs:anySimpleType" use="optional"/>
@@ -295,7 +295,7 @@
   <xs:complexType name="WordPartType" mixed="true">
     <xs:sequence>
       <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:group ref="GrammaticalFeatures" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:group ref="GramFeats" minOccurs="0" maxOccurs="unbounded"/>
       <xs:group ref="partFeatures" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="PartRep" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
@@ -320,7 +320,7 @@
       <xs:element ref="Note" minOccurs="0" maxOccurs="unbounded"/>
       <xs:group ref="POS" minOccurs="0" maxOccurs="1"/>
       <xs:group ref="Dialect" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:group ref="GrammaticalFeatures" minOccurs="0"/>
+      <xs:group ref="GramFeats" minOccurs="0"/>
 <!--   proposed change    -->
       <xs:element ref="RelFormRep" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="FormRep" minOccurs="0" maxOccurs="unbounded"/>
